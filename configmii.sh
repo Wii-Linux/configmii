@@ -1,13 +1,13 @@
 #!/bin/bash
 
-VERSION="a0.1"
+VERSION="v1.0"
 DIALOG_COMMON="--no-mouse"
 DIALOG_CANCEL=1
 DIALOG_ESC=255
 HEIGHT=0
 WIDTH=0
 
-left_text="ConfigMii Wii Linux Config Program"
+left_text="ConfigMii Wii Linux Configuration Program"
 right_text="$VERSION"
 
 text_len=$((${#left_text} + ${#right_text}))
