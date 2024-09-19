@@ -73,7 +73,7 @@ while true; do
       esac
       ;;
     4 )
-      exec ./placeholder.sh
+      exec ./xorgconf.sh
       ;;
     5 )
       rm mirror_list.sh
