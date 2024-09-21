@@ -32,8 +32,9 @@ while true; do
     "2" "Edit Initrd loader settings" \
     "3" "Edit loader.img settings" \
     "4" "Switch Xorg driver" \
-    "5" "Select package mirror" \
-    "6" "Quit" \
+    "5" "Install Secondary package mirror server (this can only run on archlinux not power)" \
+    "6" "Configure which mirror to use for pacman" \
+    "7" "Quit" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -76,14 +77,22 @@ while true; do
       exec ./xorgconf.sh
       ;;
     5 )
-      rm mirror_list.sh
+      rm Mirror_Secondary.sh
       clear
-      printf "Downloading mirror list, please wait...\n\nIf no menu appears and errors show up after this message,\nplease check your network configuration.\nIf problem persists please join the Wii Linux Discord\nusing the 'helpmii' command.\n\n"
-      wget -q http://pretzels.onthewifi.com/mirror_list.sh
-      chmod +x mirror_list.sh
-      exec ./mirror_list.sh
+      printf "Downloading Secondary mirror server installer, please wait...\n\nIf no menu appears and errors show up after this message,\nplease check your network configuration.\nIf problem persists please join the Wii Linux Discord\nusing the 'helpmii' command.\n\n"
+      wget -q https://files.thecheese.io/Mirrors%20for%20archpower-wii/Mirror_Secondary.sh
+      chmod +x Mirror_Secondary.sh
+      exec ./Mirror_Secondary.sh
       ;;
     6 )
+      rm Chooser.sh
+      clear
+      printf "Downloading Package Repo Mirror Selector, please wait...\n\nIf no menu appears check ur wifi or get a better wii/j try to restart the configmii.sh if the error persists join the Discord and ask for help\n\n"
+      sudo su
+      wget -q https://files.thecheese.io/Mirrors%20for%20archpower-wii/Chooser.sh
+      chmod +x Chooser.sh
+      exec ./Chooser.sh
+    7 )
       clear
       exit
       ;;
