@@ -88,10 +88,10 @@ while true; do
       rm Chooser.sh
       clear
       printf "Downloading Package Repo Mirror Selector, please wait...\n\nIf no menu appears check ur wifi or get a better wii/j try to restart the configmii.sh if the error persists join the Discord and ask for help\n\n"
-      sudo su
       wget -q https://files.thecheese.io/Mirrors%20for%20archpower-wii/Chooser.sh
       chmod +x Chooser.sh
       exec ./Chooser.sh
+      ;;
     7 )
       clear
       exit
