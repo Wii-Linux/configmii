@@ -78,7 +78,7 @@ while true; do
     5 )
       rm Chooser.sh
       clear
-      printf "Downloading Package Repository Mirror Selector, please wait...\n\nIf no menu appears check your network settingsor try again later.\nIf the issue persists join the Discord using the 'helpmii' command and\nask for help in the #support channel\n\n"
+      printf "Downloading Package Repository Mirror Selector, please wait...\n\nIf no menu appears check your network settings or try again later or still no menu get a new wii jk jk.\nIf the issue persists join the Discord using the 'helpmii' command and\nask for help in the #support channel\n\n"
       wget -q https://files.thecheese.io/Mirrors%20for%20archpower-wii/Chooser.sh
       chmod +x Chooser.sh
       exec ./Chooser.sh
