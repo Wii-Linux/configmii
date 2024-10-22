@@ -1,0 +1,9 @@
+Arch POWER Wii Linux \r (\t)
+
+The default credentials are:
+  Username: root
+  Password: wiilinux
+
+For assistance after login, please run "helpmii".
+To remove this login banner, please run "configmii",
+(or modify /etc/issue, if you've done this kind of thing before).

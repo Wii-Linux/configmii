@@ -28,12 +28,14 @@ while true; do
     --clear \
     --cancel-label "Cancel" \
     --menu "Select an option:" $HEIGHT $WIDTH 4 \
-    "1" "Edit Kernel command line" \
-    "2" "Edit Initrd loader settings" \
-    "3" "Edit loader.img settings" \
-    "4" "Switch Xorg driver" \
-    "5" "Configure package mirror" \
-    "6" "Quit" \
+    "1" "Set the Wii Linux login banner"\
+    "2" "Set the ArchPOWER login banner" \
+    "3" "Edit Kernel command line" \
+    "4" "Edit Initrd loader settings" \
+    "5" "Edit loader.img settings" \
+    "6" "Switch Xorg driver" \
+    "7" "Configure package mirror" \
+    "8" "Quit" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -49,18 +51,18 @@ while true; do
   esac
   case $selection in
     1 )
-      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your Wii Linux install!\nOnly proceed if you know what you're doing." 12 60
+      dialog $DIALOG_COMMON --title "Confirmation" --yesno "Are you sure you want to set the login banner to the Wii Linux default? This action cannot be undone." 12 60
       response=$?
       case $response in
-        0) exec ./placeholder.sh;;
+        0) cp /usr/lib/wii-linux/etc-issue/banner_stock.txt /etc/issue ;;
         1) clear;;
       esac
       ;;
-    2 )
-      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your Wii Linux install!\nOnly proceed if you know what you're doing." 12 60
+    1 )
+      dialog $DIALOG_COMMON --title "Confirmation" --yesno "Are you sure you want to set the login banner to the ArchPOWER default? This action cannot be undone." 12 60
       response=$?
       case $response in
-        0) exec ./placeholder.sh;;
+        0) cp /usr/lib/wii-linux/etc-issue/banner_wii-linux.txt /etc/issue ;;
         1) clear;;
       esac
       ;;
@@ -73,9 +75,25 @@ while true; do
       esac
       ;;
     4 )
+      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your Wii Linux install!\nOnly proceed if you know what you're doing." 12 60
+      response=$?
+      case $response in
+        0) exec ./placeholder.sh;;
+        1) clear;;
+      esac
+      ;;
+    5)
+      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your Wii Linux install!\nOnly proceed if you know what you're doing." 12 60
+      response=$?
+      case $response in
+        0) exec ./placeholder.sh;;
+        1) clear;;
+      esac
+      ;;
+    6 )
       exec ./xorgconf.sh
       ;;
-    5 )
+    7 )
       rm Chooser.sh
       clear
       printf "Downloading Package Repository Mirror Selector, please wait...\n\nIf no menu appears check your network settings or try again later or still no menu get a new wii jk jk.\nIf the issue persists join the Discord using the 'helpmii' command and\nask for help in the #support channel\n\n"
@@ -83,7 +101,7 @@ while true; do
       chmod +x Chooser.sh
       exec ./Chooser.sh
       ;;
-    6 )
+    8 )
       clear
       exit
       ;;
