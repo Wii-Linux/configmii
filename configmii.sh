@@ -54,7 +54,7 @@ while true; do
       dialog $DIALOG_COMMON --title "Confirmation" --yesno "Are you sure you want to set the login banner to the Wii Linux default? This action cannot be undone." 6 60
       response=$?
       case $response in
-        0) cp ./etc-issue/banner_stock.txt /etc/issue ;;
+        0) cp ./etc-issue/banner_wii-linux.txt /etc/issue ;;
         1) clear;;
       esac
       ;;
@@ -62,7 +62,7 @@ while true; do
       dialog $DIALOG_COMMON --title "Confirmation" --yesno "Are you sure you want to set the login banner to the ArchPOWER default? This action cannot be undone." 6 60
       response=$?
       case $response in
-        0) cp ./etc-issue/banner_wii-linux.txt /etc/issue ;;
+        0) cp ./etc-issue/banner_stock.txt /etc/issue ;;
         1) clear;;
       esac
       ;;
