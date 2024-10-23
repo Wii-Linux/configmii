@@ -1,1 +1,1 @@
-Arch POWER Wii Linux \r (\t)
+Arch POWER Wii Linux \r (\l)
