@@ -35,7 +35,7 @@ while true; do
     "5" "Edit loader.img settings" \
     "6" "Switch Xorg driver" \
     "7" "Configure package mirror" \
-    "0" "Quit" \
+    "8" "Quit" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -58,7 +58,7 @@ while true; do
         1) clear;;
       esac
       ;;
-    1 )
+    2 )
       dialog $DIALOG_COMMON --title "Confirmation" --yesno "Are you sure you want to set the login banner to the ArchPOWER default? This action cannot be undone." 12 60
       response=$?
       case $response in
@@ -67,7 +67,7 @@ while true; do
       esac
       ;;
     3 )
-      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your Wii Linux install!\nOnly proceed if you know what you're doing." 12 60
+      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your\nWii Linux install!\nOnly proceed if you know what you're doing." 7 60
       response=$?
       case $response in
         0) exec ./placeholder.sh;;
@@ -75,7 +75,7 @@ while true; do
       esac
       ;;
     4 )
-      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your Wii Linux install!\nOnly proceed if you know what you're doing." 12 60
+      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your\nWii Linux install!\nOnly proceed if you know what you're doing." 7 60
       response=$?
       case $response in
         0) exec ./placeholder.sh;;
@@ -83,7 +83,7 @@ while true; do
       esac
       ;;
     5)
-      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your Wii Linux install!\nOnly proceed if you know what you're doing." 12 60
+      dialog $DIALOG_COMMON --title "WARNING!" --yesno "Editing these settings could potentially break your\nWii Linux install!\nOnly proceed if you know what you're doing." 7 60
       response=$?
       case $response in
         0) exec ./placeholder.sh;;
@@ -94,14 +94,14 @@ while true; do
       exec ./xorgconf.sh
       ;;
     7 )
-      rm Chooser.sh
+      rm ./mirrors.sh
       clear
-      printf "Downloading Package Repository Mirror Selector, please wait...\n\nIf no menu appears check your network settings or try again later or still no menu get a new wii jk jk.\nIf the issue persists join the Discord using the 'helpmii' command and\nask for help in the #support channel\n\n"
-      wget -q https://files.thecheese.io/Mirrors%20for%20archpower-wii/Chooser.sh
-      chmod +x Chooser.sh
-      exec ./Chooser.sh
+      printf "Downloading Package Repository Mirror Selector, please wait...\n\nIf no menu appears check your network settings or try again later.\nIf the issue persists join the Discord server using the 'helpmii' command and\nask for help in the #support channel\n\n"
+      wget -q http://pretzels.onthewifi.com/mirrors.sh ./mirrors.sh
+      chmod +x ./mirrors.sh
+      exec ./mirrors.sh
       ;;
-    0 )
+    8 )
       clear
       exit
       ;;
