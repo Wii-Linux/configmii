@@ -1,4 +1,4 @@
-Arch POWER Wii Linux \r (\t)
+Arch POWER Wii Linux \r (\l)
 
 The default credentials are:
   Username: root
