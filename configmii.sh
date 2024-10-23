@@ -35,7 +35,7 @@ while true; do
     "5" "Edit loader.img settings" \
     "6" "Switch Xorg driver" \
     "7" "Configure package mirror" \
-    "8" "Quit" \
+    "0" "Quit" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -101,7 +101,7 @@ while true; do
       chmod +x Chooser.sh
       exec ./Chooser.sh
       ;;
-    8 )
+    0 )
       clear
       exit
       ;;
