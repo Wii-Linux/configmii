@@ -27,7 +27,7 @@ while true; do
     --title "Main Menu" \
     --clear \
     --cancel-label "Cancel" \
-    --menu "Select an option:" $HEIGHT $WIDTH 4 \
+    --menu "Select an option:" $HEIGHT $WIDTH 5 \
     "1" "Set the Wii Linux login banner"\
     "2" "Set the ArchPOWER login banner" \
     "3" "Edit Kernel command line" \
