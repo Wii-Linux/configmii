@@ -34,7 +34,6 @@ while true; do
     "4" "Edit Initrd loader settings" \
     "5" "Edit loader.img settings" \
     "6" "Switch Xorg driver" \
-    "7" "Configure package mirror" \
     "0" "Quit" \
     2>&1 1>&3)
   exit_status=$?
@@ -92,14 +91,6 @@ while true; do
       ;;
     6 )
       exec ./xorgconf.sh
-      ;;
-    7 )
-      rm ./mirrors.sh
-      clear
-      printf "Downloading Package Repository Mirror Selector, please wait...\n\nIf no menu appears check your network settings or try again later.\nIf the issue persists join the Discord server using the 'helpmii' command and\nask for help in the #support channel\n\n"
-      wget -q http://pretzels.onthewifi.com/mirrors.sh ./mirrors.sh
-      chmod +x ./mirrors.sh
-      exec ./mirrors.sh
       ;;
     0 )
       clear
