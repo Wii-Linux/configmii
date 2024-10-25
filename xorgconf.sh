@@ -15,8 +15,8 @@ while true; do
     --clear \
     --cancel-label "Cancel" \
     --menu "Please select your prefferred driver for X11" $HEIGHT $WIDTH 4 \
-    "1" "fbdev (More compatible, slow)" \
-    "2" "Hollywood Driver (Less compatible, fast)" \
+    "1" "fbdev (More compatible, no hardware acceleration)" \
+    "2" "Flipper/Hollywood Driver (Less compatible, w/ hardware accel)" \
     "3" "Go back to ConfigMii" \
     2>&1 1>&3)
   exit_status=$?
