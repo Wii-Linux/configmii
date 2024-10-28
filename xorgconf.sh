@@ -21,9 +21,9 @@ while true; do
 	ret=$?
 	case $ret in
 		1)
-			exec ./placeholder.sh ;;
+			unimplemented ;;
 		2)
-			exec ./placeholder.sh ;;
+			unimplemented ;;
 		255)
 			exit 0 ;;
 	esac
