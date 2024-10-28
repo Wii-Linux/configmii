@@ -21,13 +21,15 @@ while true; do
 	"1" "Login banner settings" \
 	"2" "Boot settings" \
 	"3" "ArchPOWER settings" \
+	"4" "Xorg settings" \
 	"0" "Quit"
 	case $? in
 		1) ./loginbanner.sh ;;
 		2) ./boot-settings.sh ;;
 		3) ./archpower-settings.sh ;;
+		4) ./xorgconf.sh ;;
 		0|255)
 			clear
-			exit ;;
+			exit 0;;
 	esac
 done
