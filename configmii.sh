@@ -22,6 +22,7 @@ while true; do
 	"2" "Boot settings" \
 	"3" "ArchPOWER settings" \
 	"4" "Xorg settings" \
+	"5" "Install a DE" \
 	"9" "About ConfigMii" \
 	"0" "Quit"
 	case $? in
@@ -29,6 +30,7 @@ while true; do
 		2) ./boot-settings.sh ;;
 		3) ./archpower-settings.sh ;;
 		4) ./xorgconf.sh ;;
+		5) ./de-installer.sh ;;
 		9) info "About" "ConfigMii - The Wii Linux Configuration Program.\n\nConfigMii Version $VERSION\nUsing $UTIL_VER_STR\n\nConfigMii was made by Techflash, Tech64, and other contributors.\nThis program is licensed under the terms of the GNU General Public License, version 2.\nYou may find these terms under the ConfigMii install directory, under the LICENSE file." 15 70 ;;
 		0|255)
 			clear
