@@ -9,36 +9,109 @@ else
 	exit 1
 fi
 
+xorgPkgs="xorg-server xorg-xinit xf86-video-fbdev"
+
+saveXinitrc() {
+	if [ -f ~/.xinitrc ]; then
+		mv ~/.xinitrc ~/.xinitrc.bak
+	fi
+}
+
+updateXinitrc() {
+	echo '#!/bin/sh
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+	for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi' > ~/.xinitrc
+}
+
+end() {
+	info "Done" "The DE has been installed!\n\nYou can now run startx to start the Xorg server and your DE!" 9 60
+}
+
+end_node() {
+	info "Done" "The DE has been installed!\n\nYou can now run startx to start the Xorg server!" 9 60
+}
+
+end_xfce() {
+	info "Done" "The DE has been installed!\n\nYou can now run startxfce4 to start the Xorg server and your DE!" 9 60
+}
+
+pacmanWrapper() {
+	script -c "pacman -Sp $@; echo \$? > /tmp/pacman-ret" /tmp/pacman-log.txt
+	ret="$(cat /tmp/pacman-ret)"
+	if [ "$ret" != "0" ]; then
+		cat /tmp/pacman-log.txt | head -n -1 | tail -n +2 > ~/pacman-log.txt
+		info "Error" "pacman exited with a non-zero status code ($ret)!\nAn error report has been saved to ~/pacman-log.txt.\nIf you need help, please contact support!" 9 60
+		return 1
+	fi
+	sleep 1
+	rm -f /tmp/pacman-{log.txt,ret}
+	return 0
+}
 
 while true; do
 	menu "DE Installer" \
 		"OK" "Cancel" \
-		"Select an option:" \
-		"1" "Install Xorg (no desktop)" \
-		"2" "Install Xorg with icewm (reccommended)"
+		"The DEs/WMs are rated (ABCDF) in tiers of performance.  Please select an option:" \
+		"1" "[A] Install Xorg (no desktop)" \
+		"2" "[B] Install Xorg with i3wm" \
+		"3" "[C] Install Xorg with icewm (recommended for new users)" \
+		"4" "[C] Install Xorg with fluxbox" \
+		"5" "[C] Install Xorg with openbox" \
+		"6" "[F] Install Xorg with xfce4"
 	case "$?" in
 		1)
-			script -c 'pacman -S xorg-server xorg-xinit xf86-video-fbdev; echo $? > /tmp/pacman-ret' /tmp/pacman-log.txt
-			ret="$(cat /tmp/pacman-ret)"
-			if [ "$ret" != "0" ]; then
-				cat /tmp/pacman-log.txt | head -n -1 | tail -n +2 > ~/pacman-log.txt
-				info "Error" "pacman exited with a non-zero status code ($ret)!\nAn error report has been saved to ~/pacman-log.txt.\nIf you need help, please contact support!" 9 60
-			else
-				info "Success" "Xorg installed succesfully!\nRemember to install a window manager or desktop environment and add it to '~/.xinitrc'\nby adding a line\n containing 'exec <DE or WM executable name here>'" 9 60
-			fi
-			rm -f /tmp/pacman-{log.txt,ret} ;;
+			pacmanWrapper "$xorgPkgs" || {
+				# failed...
+				continue
+			}
 
+			end_node ;;
 		2)
-			script -c 'pacman -S xorg-server xorg-xinit xf86-video-fbdev icewm ttf-dejavu xterm; echo $? > /tmp/pacman-ret' /tmp/pacman-log.txt
-			ret="$(cat /tmp/pacman-ret)"
-			if [ "$ret" != "0" ]; then
-				cat /tmp/pacman-log.txt | head -n -1 | tail -n +2 > ~/pacman-log.txt
-				info "Error" "pacman exited with a non-zero status code ($ret)!\nAn error report has been saved to ~/pacman-log.txt.\nIf you need help, please contact support!" 9 60
-			else
-				printf "exec icewm" > ~/.xinitrc
-				info "Success" "Xorg installed succesfully!\nTo start icewm, use the 'startx' command." 9 60
-			fi
-			rm -f /tmp/pacman-{log.txt,ret} ;;
+			pacmanWrapper "$xorgPkgs i3" || {
+				# failed...
+				continue
+			}
+			saveXinitrc
+			updateXinitrc
+			echo "exec i3" >> ~/.xinitrc
+			end ;;
+		3)
+			pacmanWrapper "$xorgPkgs icewm ttf-dejavu xterm" || {
+				# failed...
+				continue
+			}
+			saveXinitrc
+			echo "exec icewm-session" > ~/.xinitrc
+			end ;;
+		4)
+			pacmanWrapper "$xorgPkgs fluxbox ttf-dejavu xterm" || {
+				# failed...
+				continue
+			}
+			saveXinitrc
+			updateXinitrc
+			echo "exec fluxbox" >> ~/.xinitrc
+			end ;;
+		5)
+			pacmanWrapper "$xorgPkgs openbox ttf-dejavu xterm" || {
+				# failed...
+				continue
+			}
+			saveXinitrc
+			echo "exec openbox-session" >> ~/.xinitrc
+			end ;;
+		6)
+			pacmanWrapper "$xorgPkgs xfce4 xfce4-goodies ttf-dejavu xterm" || {
+				# failed...
+				continue
+			}
+			saveXinitrc
+			echo "echo 'Use startxfce4 instead of startx for XFCE!' >&2" >> ~/.xinitrc
+			end_xfce ;;
 		255)
 			exit 0 ;;
 	esac

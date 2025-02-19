@@ -20,7 +20,7 @@ while true; do
 	"Select an option:" \
 	"1" "Login banner settings" \
 	"2" "ArchPOWER settings" \
-	"3" "Install a DE" \
+	"3" "Install a DE/WM" \
 	"9" "About ConfigMii" \
 	"0" "Quit"
 	case $? in
