@@ -19,16 +19,14 @@ while true; do
 	"OK" "Cancel" \
 	"Select an option:" \
 	"1" "Login banner settings" \
-	"2" "Boot settings" \
-	"3" "ArchPOWER settings" \
-	"4" "Install a DE" \
+	"2" "ArchPOWER settings" \
+	"3" "Install a DE" \
 	"9" "About ConfigMii" \
 	"0" "Quit"
 	case $? in
 		1) ./loginbanner.sh ;;
-		2) ./boot-settings.sh ;;
-		3) ./archpower-settings.sh ;;
-		4) yesno "WARNING!" "Xorg performance is VERY slow due to a lack of a proper GPU driver and there's nothing that can be done about that for the time being.\n\nAre you sure you want to continue?" 12 60
+		2) ./archpower-settings.sh ;;
+		3) yesno "WARNING!" "Xorg performance is VERY slow due to a lack of a proper GPU driver and there's nothing that can be done about that for the time being.\n\nAre you sure you want to continue?" 12 60
 			case $? in
 				0) ./de-installer.sh ;;
 				1) clear ;;
