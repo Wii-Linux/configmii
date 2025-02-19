@@ -24,7 +24,7 @@ while true; do
 				cat /tmp/pacman-log.txt | head -n -1 | tail -n +2 > ~/pacman-log.txt
 				info "Error" "pacman exited with a non-zero status code ($ret)!\nAn error report has been saved to ~/pacman-log.txt.\nIf you need help, please contact support!" 9 60
 			else
-				info "Success" "Xorg installed succesfully!\nRemember to install a WM or DE and add it to .xinitrc." 6 30
+				info "Success" "Xorg installed succesfully!\nRemember to install a window manager or desktop environment and add it to '~/.xinitrc'\nby adding a line\n containing 'exec <DE or WM executable name here>'" 9 60
 			fi
 			rm -f /tmp/pacman-{log.txt,ret} ;;
 
@@ -36,7 +36,7 @@ while true; do
 				info "Error" "pacman exited with a non-zero status code ($ret)!\nAn error report has been saved to ~/pacman-log.txt.\nIf you need help, please contact support!" 9 60
 			else
 				printf "exec icewm" > ~/.xinitrc
-				info "Success" "Xorg installed succesfully!\nTo start icewm, use the 'startx' command." 6 30
+				info "Success" "Xorg installed succesfully!\nTo start icewm, use the 'startx' command." 9 60
 			fi
 			rm -f /tmp/pacman-{log.txt,ret} ;;
 		255)

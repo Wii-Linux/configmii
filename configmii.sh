@@ -21,16 +21,18 @@ while true; do
 	"1" "Login banner settings" \
 	"2" "Boot settings" \
 	"3" "ArchPOWER settings" \
-	"4" "Xorg settings" \
-	"5" "Install a DE" \
+	"4" "Install a DE" \
 	"9" "About ConfigMii" \
 	"0" "Quit"
 	case $? in
 		1) ./loginbanner.sh ;;
 		2) ./boot-settings.sh ;;
 		3) ./archpower-settings.sh ;;
-		4) ./xorgconf.sh ;;
-		5) ./de-installer.sh ;;
+		4) yesno "WARNING!" "Xorg performance is VERY slow due to a lack of a proper GPU driver and there's nothing that can be done about that for the time being.\n\nAre you sure you want to continue?" 12 60
+			case $? in
+				0) ./de-installer.sh ;;
+				1) clear ;;
+			esac ;;
 		9) info "About" "ConfigMii - The Wii Linux Configuration Program.\n\nConfigMii Version $VERSION\nUsing $UTIL_VER_STR\n\nConfigMii was made by Techflash, Tech64, and other contributors.\nThis program is licensed under the terms of the GNU General Public License, version 2.\nYou may find these terms under the ConfigMii install directory, under the LICENSE file." 15 70 ;;
 		0|255)
 			clear
