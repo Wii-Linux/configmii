@@ -40,7 +40,7 @@ end_xfce() {
 }
 
 pacmanWrapper() {
-	script -c "pacman -S $@; echo \$? > /tmp/pacman-ret" /tmp/pacman-log.txt
+	script -c "pacman --needed -S $@; echo \$? > /tmp/pacman-ret" /tmp/pacman-log.txt
 	ret="$(cat /tmp/pacman-ret)"
 	if [ "$ret" != "0" ]; then
 		cat /tmp/pacman-log.txt | head -n -1 | tail -n +2 > ~/pacman-log.txt
