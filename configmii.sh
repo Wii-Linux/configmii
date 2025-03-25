@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-export VERSION="v1.3.2"
+export VERSION="v1.4"
 
 export left_text="ConfigMii Wii Linux Configuration Program"
 export right_text="$VERSION"
@@ -11,6 +11,11 @@ elif [ -f ../common-util-scripts/util-dialog.sh ]; then
 	. ../common-util-scripts/util-dialog.sh
 else
 	echo "failed to load util-dialog.sh"
+	exit 1
+fi
+
+if [ "$UTIL_VER_STR" = "Wii Linux Common Dialog Utilities version 1.0" ]; then
+	printf "\033[1;31mYou have %s, you need v1.1 or later.\033[0m\n" "$UTIL_VER_STR"
 	exit 1
 fi
 

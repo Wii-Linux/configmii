@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -f ../util-dialog.sh ]; then
 	. ../util-dialog.sh

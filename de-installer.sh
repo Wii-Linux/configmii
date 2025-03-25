@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -f ../util-dialog.sh ]; then
 	. ../util-dialog.sh
@@ -40,15 +40,15 @@ end_xfce() {
 }
 
 pacmanWrapper() {
-	script -c "pacman --needed -S $@; echo \$? > /tmp/pacman-ret" /tmp/pacman-log.txt
+	script -c "pacman --needed -S $*; echo \$? > /tmp/pacman-ret" /tmp/pacman-log.txt
 	ret="$(cat /tmp/pacman-ret)"
 	if [ "$ret" != "0" ]; then
-		cat /tmp/pacman-log.txt | head -n -1 | tail -n +2 > ~/pacman-log.txt
+		head -n -1 /tmp/pacman-log.txt | tail -n +2 > ~/pacman-log.txt
 		info "Error" "pacman exited with a non-zero status code ($ret)!\nAn error report has been saved to ~/pacman-log.txt.\nIf you need help, please contact support!" 9 60
 		return 1
 	fi
 	sleep 1
-	rm -f /tmp/pacman-{log.txt,ret}
+	rm -f /tmp/pacman-log.txt /tmp/pacman-ret
 	return 0
 }
 
