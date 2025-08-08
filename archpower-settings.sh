@@ -9,16 +9,25 @@ else
 	exit 1
 fi
 
-
 while true; do
+	if grep -q DisableDownloadTimeout "/etc/pacman.conf"; then
+		downloadtimeout="Disabled"
+	else
+		downloadtimeout="Enabled"
+	fi
+	if grep -q ILoveCandy "/etc/pacman.conf"; then
+		downloadanimation="Enabled"
+	else
+		downloadanimation="Disabled"
+	fi
 	menu "ArchPOWER settings" \
 		"OK" "Cancel" \
 		"Select an option:" \
 		"1" "Perform a system update" \
 		"2" "Remove depenencies from uninstalled packages (\"orphaned packages\")" \
 		"3" "Clean downloaded package cache" \
-		"4" "Enable the \"testing\" repositories" \
-		"5" "Disable the \"testing\" repositories"
+		"4" "Toggle the pacman download timeout (${downloadtimeout})" \
+		"5" "Toggle the pacman download animation (${downloadanimation})"
 	case "$?" in
 		1)
 			script -c 'pacman -Syu; echo $? > /tmp/pacman-ret' /tmp/pacman-log.txt
@@ -57,9 +66,18 @@ while true; do
 			fi
 			rm -f /tmp/pacman-log.txt /tmp/pacman-ret ;;
 		4)
-			info "TODO" "TODO - write this" 6 30 ;;
+			if [ "$downloadtimeout" == "Enabled" ]; then
+				sed -i '/^# Misc options$/a DisableDownloadTimeout' /etc/pacman.conf
+			else
+				sed -i '/^DisableDownloadTimeout$/d' /etc/pacman.conf
+			fi ;;
 		5)
-			info "TODO" "TODO - write this" 6 30 ;;
+			if [ "$downloadanimation" == "Disabled" ]; then
+				sed -i '/^# Misc options$/a ILoveCandy' /etc/pacman.conf
+				
+			else
+				sed -i '/^ILoveCandy$/d' /etc/pacman.conf
+			fi ;;
 		255)
 			exit 0 ;;
 	esac
