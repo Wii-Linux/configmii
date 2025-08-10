@@ -11,9 +11,9 @@ fi
 
 while true; do
 	if grep -q DisableDownloadTimeout "/etc/pacman.conf"; then
-		downloadtimeout="Disabled"
-	else
 		downloadtimeout="Enabled"
+	else
+		downloadtimeout="Disabled"
 	fi
 	if grep -q ILoveCandy "/etc/pacman.conf"; then
 		downloadanimation="Enabled"
@@ -66,13 +66,13 @@ while true; do
 			fi
 			rm -f /tmp/pacman-log.txt /tmp/pacman-ret ;;
 		4)
-			if [ "$downloadtimeout" == "Enabled" ]; then
+			if [ "$downloadtimeout" = "Disabled" ]; then
 				sed -i '/^# Misc options$/a DisableDownloadTimeout' /etc/pacman.conf
 			else
 				sed -i '/^DisableDownloadTimeout$/d' /etc/pacman.conf
 			fi ;;
 		5)
-			if [ "$downloadanimation" == "Disabled" ]; then
+			if [ "$downloadanimation" = "Disabled" ]; then
 				sed -i '/^# Misc options$/a ILoveCandy' /etc/pacman.conf
 				
 			else
