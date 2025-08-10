@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export VERSION="v1.5.1"
+export VERSION="v1.5.2"
 
 export left_text="ConfigMii Wii Linux Configuration Program"
 export right_text="$VERSION"
