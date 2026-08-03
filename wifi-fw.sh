@@ -99,7 +99,7 @@ while true; do
 			fi
 			;;
 		4)
-			info "Help" "The Wii uses a Broadcom 4318 Wi-Fi Card.  This card requires firmware to operate.  Wii-Linux ships with the \"OpenFWWF\" open-source implementation of the firmware for this card.  For legal reasons, it cannot ship with the proprietary Broadcom firmware.  The proprietary Broadcom firmware requires extraction from a proprietary driver blob.  The proprietary Broadcom firmware offers about double the Wi-Fi performance (9mbps download/2mbps upload) compared to OpenFWWF.  ConfigMii can download and install the proprietary Broadcom firmware for you (existing internet connection via OpenFWWF or USB Ethernet is required) if you are OK with using proprietary firmware and would like the improved performance." 20 70 ;;
+			info "Help" "The Wii uses a Broadcom 4318 Wi-Fi Card and needs firmware to operate. For legal reasons, Wii-Linux cannot ship with the original proprietary Broadcom firmware.\n\nWii-Linux ships with the \"OpenFWWF\" open-source implementation of the firmware for this card, and the proprietary Broadcom firmware requires extraction from a proprietary driver blob.\n\nThe proprietary Broadcom firmware offers about double the Wi-Fi performance (9mbps download/2mbps upload) compared to OpenFWWF.\n\nConfigMii can download and install the proprietary Broadcom firmware for you (existing internet connection via OpenFWWF or USB Ethernet is required) if you are OK with using proprietary firmware and would like the improved performance." 20 70 ;;
 		0|255)
 			clear
 			exit 0;;
